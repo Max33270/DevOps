@@ -59,3 +59,10 @@ Résultat attendu :
 * Closing connection 0
 {"Accept": "*/*", "User-Agent": "curl/8.1.2", "Host": "localhost:7878"}%   
 ```
+
+## Extra Useful Commands
+```
+docker exec -it <container_id> /bin/bash
+docker system prune
+docker stop <container>
+```
