@@ -3,6 +3,7 @@ use std::{
     io::{prelude::*, BufReader},
     net::{TcpListener, TcpStream},
 };
+use gethostname::gethostname;
 
 fn main() {
     let port = env::var("PING_LISTEN_PORT").unwrap_or_else(|_| "8080".to_string());
@@ -10,6 +11,7 @@ fn main() {
     for stream in listener.incoming() {
         let stream = stream.unwrap();
         handle_connection(stream);
+        println!("Hostname: {:?}", gethostname());
     }
 }
 
