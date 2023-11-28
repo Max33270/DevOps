@@ -15,3 +15,67 @@ spec:
         memory: "256Mi"
     ports:
     - containerPort: 8080
+
+--- 
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: kube-two
+spec:
+  selector:
+    matchLabels:
+      app: app-two
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: app-two
+    spec:
+      containers:
+      - name: container-two
+        image: registry.cluster.wik.cloud/public/echo:latest
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+        ports:
+        - containerPort: 8080
+
+--- 
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-3
+  labels:
+    appName: kube-3
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
+  selector:
+    matchLabels:
+      appName: kube-3
+  template:
+    metadata:
+      labels:
+        appName: kube-3
+    spec:
+      containers:
+      - name: kube-3
+        image: registry.cluster.wik.cloud/public/echo
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+        ports:
+        - containerPort: 8080
