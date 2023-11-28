@@ -74,11 +74,47 @@ devops-proxy-1   | X.X.X.X - - [dd/MM/YYYY:hh:dd:ss +0000] "GET /ping HTTP/1.1" 
 devops-my_app-2  | Hostname: "<hostname>"
 ```
 
-## Extra Useful Commands
+## IV. Usage with Kubernetes
+```bash
+kubectl apply -f kube.yaml
+kubectl port-forward pod/kube-one 8888:8080
 ```
+
+Expected Result : 
+```bash
+$ kubectl port-forward pod/kube-one 8888:8080
+Forwarding from 127.0.0.1:8888 -> 8080
+Forwarding from [::1]:8888 -> 8080
+Handling connection for 8888
+```
+```bash
+*   Trying 127.0.0.1:8888...
+* Connected to 127.0.0.1 (127.0.0.1) port 8888 (#0)
+> GET /ping HTTP/1.1
+> Host: 127.0.0.1:8888
+> User-Agent: curl/8.1.2
+> Accept: */*
+> 
+< HTTP/1.1 200 OK
+< Content-Type: application/json
+< Connection: keep-alive
+< Keep-Alive: timeout=5
+< Transfer-Encoding: chunked
+< 
+* Connection #0 to host 127.0.0.1 left intact
+{"host":"127.0.0.1:8888","user-agent":"curl/8.1.2","accept":"*/*"}%   
+````
+
+## Extra Useful Commands
+```bash
+# Docker
 docker exec -it <container_id> /bin/bash
 docker system prune
 docker stop <container>
 sudo docker-compose down
 docker-compose rm
+# Kubernetes 
+kubectl get pods
+kubectl logs <pod_name>
+kubectl delete pod <pod_name>
 ```
