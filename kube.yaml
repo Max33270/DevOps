@@ -50,9 +50,9 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kube-3
+  name: kube-three
   labels:
-    appName: kube-3
+    appName: kube-three
 spec:
   replicas: 4
   strategy:
@@ -61,14 +61,14 @@ spec:
       maxUnavailable: 50%
   selector:
     matchLabels:
-      appName: kube-3
+      appName: kube-three
   template:
     metadata:
       labels:
-        appName: kube-3
+        appName: kube-three
     spec:
       containers:
-      - name: kube-3
+      - name: container-three
         image: registry.cluster.wik.cloud/public/echo
         resources:
           limits:
