@@ -1,5 +1,7 @@
 # DevOps
 
+![Final Result](https://github.com/Max33270/DevOps/blob/main/kube_result.png)
+
 ## I. Install
 
 ### 1. MacOs
